@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se connecter à un écran - FamilyDesk</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/favicon.ico">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="/img/logo.svg" alt="FamilyDesk Logo">
+                <h1>FamilyDesk</h1>
+            </div>
+        </header>
+        
+        <main class="connect-screen">
+            <div class="connect-container" id="code-input-container">
+                <h2>Se connecter à un écran</h2>
+                <div class="icon-large">
+                    <img src="/img/connect-icon.svg" alt="Se connecter">
+                </div>
+                <p>
+                    Entrez le code à 6 chiffres fourni par la personne qui partage son écran.
+                </p>
+                <div class="code-input-group">
+                    <input type="text" maxlength="1" class="code-input" data-index="0">
+                    <input type="text" maxlength="1" class="code-input" data-index="1">
+                    <input type="text" maxlength="1" class="code-input" data-index="2">
+                    <input type="text" maxlength="1" class="code-input" data-index="3">
+                    <input type="text" maxlength="1" class="code-input" data-index="4">
+                    <input type="text" maxlength="1" class="code-input" data-index="5">
+                </div>
+                <div id="connection-error" class="error-message hidden">
+                    Code invalide ou expiré. Veuillez réessayer.
+                </div>
+                <button id="connect-button" class="button primary" disabled>Se connecter</button>
+            </div>
+            
+            <div class="connect-container hidden" id="waiting-approval">
+                <h2>Se connecter à un écran</h2>
+                <div class="loading-spinner"></div>
+                <p>En attente d'approbation...</p>
+                <p class="sub-text">La personne qui partage son écran doit accepter votre demande de connexion.</p>
+                <button id="cancel-connection" class="button secondary">Annuler</button>
+            </div>
+            
+            <div class="connect-container hidden" id="remote-screen-container">
+                <div class="remote-control-header">
+                    <h3>Contrôle à distance</h3>
+                    <div class="remote-info">
+                        <p>Connecté à <span id="remote-device-info">Ordinateur distant</span></p>
+                    </div>
+                    <div class="control-buttons">
+                        <button id="toggle-fullscreen" class="control-button">
+                            <img src="/img/fullscreen-icon.svg" alt="Plein écran">
+                        </button>
+                        <button id="file-transfer-btn" class="control-button">
+                            <img src="/img/file-icon.svg" alt="Transfert de fichiers">
+                        </button>
+                        <button id="disconnect-btn" class="control-button danger">
+                            <img src="/img/disconnect-icon.svg" alt="Déconnecter">
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="remote-screen-view">
+                    <canvas id="remote-screen"></canvas>
+                </div>
+                
+                <div class="file-transfer-panel hidden" id="file-transfer-panel">
+                    <h4>Transfert de fichiers</h4>
+                    <div class="file-drop-area" id="file-drop-area">
+                        <p>Glissez-déposez des fichiers ici ou</p>
+                        <label for="file-input" class="file-input-label">Sélectionnez des fichiers</label>
+                        <input type="file" id="file-input" multiple class="hidden">
+                    </div>
+                    <div class="file-transfer-list" id="file-transfer-list">
+                        <p>Aucun fichier transféré pendant cette session</p>
+                    </div>
+                    <button id="close-file-panel" class="button secondary">Fermer</button>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 FamilyDesk - Application familiale de contrôle à distance</p>
+            <p>Aucune donnée n'est sauvegardée après la fin de votre session</p>
+            <div class="contact-info">
+                <p>DJL - Computer Sciences</p>
+                <p>Email : djl.computersciences@gmail.com</p>
+                <p>Tel : +242 06 628 23 07</p>
+                <p>Brazzaville, République du Congo</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="/js/connect.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partager mon écran - FamilyDesk</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/favicon.ico">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="/img/logo.svg" alt="FamilyDesk Logo">
+                <h1>FamilyDesk</h1>
+            </div>
+        </header>
+        
+        <main class="share-screen">
+            <div class="share-container" id="pre-share">
+                <h2>Partager mon écran</h2>
+                <div class="icon-large">
+                    <img src="/img/monitor-icon.svg" alt="Écran">
+                </div>
+                <p>
+                    En cliquant sur le bouton ci-dessous, vous générerez un code temporaire que vous pourrez communiquer à la personne qui souhaite accéder à votre écran.
+                </p>
+                <button id="generate-code" class="button primary">Générer un code d'accès</button>
+            </div>
+            
+            <div class="share-container hidden" id="code-display">
+                <h2>Partager mon écran</h2>
+                <p>Code d'accès (valable 10 minutes)</p>
+                <div class="access-code" id="access-code-display">
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                </div>
+                <p>Communiquez ce code à la personne qui souhaite se connecter</p>
+                <div id="connection-status">
+                    <p>En attente d'une connexion...</p>
+                </div>
+                <button id="cancel-sharing" class="button secondary">Annuler</button>
+            </div>
+            
+            <div class="share-container hidden" id="connection-request">
+                <h2>Partager mon écran</h2>
+                <div class="access-code" id="access-code-display-2">
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                    <div class="code-digit">0</div>
+                </div>
+                <div class="connection-alert">
+                    <p id="connection-request-text">John's Computer (192.168.1.45) souhaite se connecter à votre écran.</p>
+                    <p>En acceptant, cette personne pourra voir et contrôler votre écran à distance.</p>
+                </div>
+                <div class="button-group">
+                    <button id="reject-connection" class="button secondary">Refuser</button>
+                    <button id="accept-connection" class="button primary">Accepter</button>
+                </div>
+            </div>
+            
+            <div class="share-container hidden" id="active-sharing">
+                <div class="sharing-header">
+                    <h3>Partage d'écran actif</h3>
+                    <div class="connection-info">
+                        <p>Connecté avec <span id="remote-user-info">Utilisateur distant</span></p>
+                    </div>
+                </div>
+                
+                <div class="sharing-controls">
+                    <div class="control-group">
+                        <button id="pause-sharing" class="control-button">
+                            <img src="/img/pause-icon.svg" alt="Pause">
+                            <span>Pause</span>
+                        </button>
+                        <button id="resume-sharing" class="control-button hidden">
+                            <img src="/img/play-icon.svg" alt="Reprendre">
+                            <span>Reprendre</span>
+                        </button>
+                        <button id="toggle-remote-control" class="control-button active">
+                            <img src="/img/mouse-icon.svg" alt="Contrôle">
+                            <span>Contrôle à distance</span>
+                        </button>
+                        <button id="end-session" class="control-button danger">
+                            <img src="/img/stop-icon.svg" alt="Arrêter">
+                            <span>Arrêter le partage</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="file-transfer-section">
+                    <h4>Transfert de fichiers</h4>
+                    <div id="file-transfer-history">
+                        <p>Aucun fichier transféré pendant cette session</p>
+                    </div>
+                </div>
+                
+                <div class="notification-banner">
+                    <p>Votre écran est actuellement partagé et peut être contrôlé à distance</p>
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2025 FamilyDesk - Application familiale de contrôle à distance</p>
+            <p>Aucune donnée n'est sauvegardée après la fin de votre session</p>
+            <div class="contact-info">
+                <p>DJL - Computer Sciences</p>
+                <p>Email : djl.computersciences@gmail.com</p>
+                <p>Tel : +242 06 628 23 07</p>
+                <p>Brazzaville, République du Congo</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="/js/share.js"></script>
+</body>
+</html>
